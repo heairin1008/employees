@@ -37,7 +37,6 @@
 	</nav>
 	
 	<!-- dept_manager 테이블 목록 -->
-	<h1>dept_manager 테이블 목록</h1>
 	<%
 		String deptNo = "";
 		if(request.getParameter("deptNo") != null){
@@ -125,105 +124,100 @@
 	%>
 	
 	<!-- 출력 -->
-	<form action="./deptManagerList.jsp">
-		<%
-			if(ck.equals("no")){
-		%>
-				<input type="checkbox" name="ck" value="yes">재직중 
-		<%
-			}else{
-		%>
-				<input type="checkbox" name="ck" value="yes" checked="checked">재직중
-		<%
-			}
-		%>
-		
-		<select name="deptNo">
-			<option value="">선택없음</option>
+	<div style="width:80%; margin:auto; padding-top:20px; float:center;">
+		<h1>dept_manager 테이블 목록</h1>
+		<form action="./deptManagerList.jsp">
 			<%
-				while(rs3.next()){
-					if(deptNo.equals(rs3.getString("dept_no"))){
-			%>				
-						<option value=<%=rs3.getString("dept_no")%> selected="selected"><%=rs3.getString("dept_no")%></option>
-			<%
-					}else{
+				if(ck.equals("no")){
 			%>
-						<option value=<%=rs3.getString("dept_no")%>><%=rs3.getString("dept_no")%></option>
+					<input type="checkbox" name="ck" value="yes">재직중 
 			<%
-					}
+				}else{
+			%>
+					<input type="checkbox" name="ck" value="yes" checked="checked">재직중
+			<%
 				}
 			%>
-		</select>
-		<button type="submit">검색</button>
-	</form>
-	<table border="1">
-		<thead>
-			<tr>
-				<th>dept_no</th>
-				<th>emp_no</th>
-				<th>from_date</th>
-				<th>to_date</th>
-			</tr>
-		</thead>
-		<tbody>
-		<%
-			while(rs.next()){
-		%>
-			<tr>
-				<td><%=rs.getString("dept_no") %></td>
-				<td><%=rs.getInt("emp_no") %></td>
-				<td><%=rs.getString("from_date") %></td>
-				<td><%=rs.getString("to_date") %></td>
-			</tr>
-		<%			
-			}
-		%>
-		</tbody>
-	</table>
-		<!-- 페이징 네비게이션  -->
-<table>
-		<tr>
-			<!-- 첫번째 페이지로 가는 버튼 -->
-			<td>
+			
+			<select class="custom-select" style="width:30%;" name="deptNo">
+				<option value="">선택없음</option>
+				<%
+					while(rs3.next()){
+						if(deptNo.equals(rs3.getString("dept_no"))){
+				%>				
+							<option value=<%=rs3.getString("dept_no")%> selected="selected"><%=rs3.getString("dept_no")%></option>
+				<%
+						}else{
+				%>
+							<option value=<%=rs3.getString("dept_no")%>><%=rs3.getString("dept_no")%></option>
+				<%
+						}
+					}
+				%>
+			</select>
+			<button class="btn btn-secondary" type="submit">검색</button>
+		</form>
+		<table class="table" style="margin-top:10px;">
+			<thead>
+				<tr>
+					<th>dept_no</th>
+					<th>emp_no</th>
+					<th>from_date</th>
+					<th>to_date</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%
+				while(rs.next()){
+			%>
+				<tr>
+					<td><%=rs.getString("dept_no") %></td>
+					<td><%=rs.getInt("emp_no") %></td>
+					<td><%=rs.getString("from_date") %></td>
+					<td><%=rs.getString("to_date") %></td>
+				</tr>
+			<%			
+				}
+			%>
+			</tbody>
+		</table>
+	</div>
+	<!-- 페이징 네비게이션  -->
+	<div>
+		<ul class="pagination justify-content-center">
+			<!-- 처음으로 가는 버튼 -->
 			<%
 				if(currentPage != 1){
 			%>
-					<a href="./deptManagerList.jsp?currentPage=1&ck=<%=ck%>&deptNo=<%=deptNo%>">처음으로</a>
+				<li class="page-item"><a class="page-link" href="./deptManagerList.jsp?currentPage=1&ck=<%=ck%>&deptNo=<%=deptNo%>">처음으로</a></li>
 			<%
 				}
 			%>
-			</td>
-			<!-- 이전 페이지로 가는 버튼 -->
-			<td>
+			<!-- 이전으로 가는 버튼 -->
 			<%
 				if(currentPage > 1){
 			%>
-					<a href="./deptManagerList.jsp?currentPage=<%=currentPage - 1%>&ck=<%=ck%>&deptNo=<%=deptNo%>">이전</a>
+				<li class="page-item"><a class="page-link" href="./deptManagerList.jsp?currentPage=<%=currentPage - 1%>&ck=<%=ck%>&deptNo=<%=deptNo%>">이전</a></li>
 			<%
 				}
 			%>
-			</td>
-			<!-- 다음 페이지로 가는 버튼 -->
-			<td>
+			<!-- 다음으로 가는 버튼 -->
 			<%
 				if(currentPage < lastPage){
 			%>
-					<a href="./deptManagerList.jsp?currentPage=<%=currentPage + 1%>&ck=<%=ck%>&deptNo=<%=deptNo%>">다음</a>
+					<li class="page-item"><a class="page-link" href="./deptManagerList.jsp?currentPage=<%=currentPage + 1%>&ck=<%=ck%>&deptNo=<%=deptNo%>">다음</a></li>
 			<%
 				}
 			%>
-			</td>
-			<!-- 마지막 페이지로 가는 버튼 -->
-			<td>
+			<!-- 마지막으로 가는 버튼 -->
 			<%
 				if(currentPage != lastPage){
 			%>
-					<a href="./deptManagerList.jsp?currentPage=<%=lastPage%>&ck=<%=ck%>&deptNo=<%=deptNo%>">마지막으로</a>
+					<li class="page-item"><a class="page-link" href="./deptManagerList.jsp?currentPage=<%=lastPage%>&ck=<%=ck%>&deptNo=<%=deptNo%>">마지막으로</a></li>
 			<%
 				}
 			%>
-			</td>
-		</tr>
-	</table>
+		</ul>
+	</div>
 </body>
 </html>

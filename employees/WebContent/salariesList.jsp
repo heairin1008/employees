@@ -168,7 +168,13 @@
 		<button type="submit">검색</button>
 	</form>
 	<!-- 페이징 네비게이션 -->
+		<%
+			if(currentPage != 1){
+		%>
 			<a href="./salariesList.jsp?currentPage=1&beginSalary=<%=beginSalary%>&endSalary=<%=endSalary%>">처음으로</a>
+		<% 
+			}
+		%>
 		<%
 			if(currentPage > 1){
 		%>

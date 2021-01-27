@@ -39,7 +39,6 @@
 	</nav>
 	
 	<!-- employees 테이블 목록 -->
-	<h1>employees 테이블 목록</h1>
 	<%
 		// 성별 / 이름 찾기 변수
 		String searchGender = "선택안함";
@@ -134,142 +133,137 @@
 		}
 	%>
 	
-	<table border="1">
-		<thead>
-			<tr>
-				<th>emp_no</th>
-				<th>birth_date</th>
-				<th>age</th>
-				<th>first_name</th>
-				<th>last_name</th>
-				<th>gender</th>
-				<th>hire_date</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				int age;
-				int year = Calendar.getInstance().get(Calendar.YEAR);
-				
-				while(rs.next()){
-					
-					String[] date = rs.getString("birth_date").split("-");
-					age = year - Integer.parseInt(date[0]) + 1;
-			%>
+	<div style="width:80%; margin:auto; padding-top:20px; float:center;">
+		<h1>employees 테이블 목록</h1>
+		<table class="table" style="margin-top:10px;">
+			<thead>
 				<tr>
-					<td><%=rs.getInt("emp_no")%></td>
-					<td><%=rs.getString("birth_date")%></td>
-					<td><%=age%></td>
-					<td><%=rs.getString("first_name")%></td>
-					<td><%=rs.getString("last_name")%></td>
-					<td>
-					<%
-						if(rs.getString("gender").equals("M")){
-					%>
-						남자
-					<%
-						}else{
-					%>
-						여자
-					<%
-						}
-					%>
-					</td>
-					<td><%=rs.getString("hire_date")%></td>
+					<th>emp_no</th>
+					<th>birth_date</th>
+					<th>age</th>
+					<th>first_name</th>
+					<th>last_name</th>
+					<th>gender</th>
+					<th>hire_date</th>
 				</tr>
-			<%
-				}
-			%>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<%
+					int age;
+					int year = Calendar.getInstance().get(Calendar.YEAR);
+					
+					while(rs.next()){
+						
+						String[] date = rs.getString("birth_date").split("-");
+						age = year - Integer.parseInt(date[0]) + 1;
+				%>
+					<tr>
+						<td><%=rs.getInt("emp_no")%></td>
+						<td><%=rs.getString("birth_date")%></td>
+						<td><%=age%></td>
+						<td><%=rs.getString("first_name")%></td>
+						<td><%=rs.getString("last_name")%></td>
+						<td>
+						<%
+							if(rs.getString("gender").equals("M")){
+						%>
+							남자
+						<%
+							}else{
+						%>
+							여자
+						<%
+							}
+						%>
+						</td>
+						<td><%=rs.getString("hire_date")%></td>
+					</tr>
+				<%
+					}
+				%>
+			</tbody>
+		</table>
+	</div>
 	<!-- 페이징 네비게이션 -->
-	<table>
-		<tr>
-			<!-- 첫번째 페이지로 가는 버튼 -->
-			<td>
+	<div>
+		<ul class="pagination justify-content-center">
 			<%
 				if(currentPage != 1){
 			%>
-					<a href="./employeesList.jsp?currentPage=1&searchGender=<%=searchGender%>&searchName=<%=searchName%>">처음으로</a>
+					<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=1&searchGender=<%=searchGender%>&searchName=<%=searchName%>">처음으로</a></li>
 			<%
 				}
 			%>
-			</td>
-			<!-- 이전 페이지로 가는 버튼 -->
-			<td>
 			<%
 				if(currentPage > 1){
 			%>
-					<a href="./employeesList.jsp?currentPage=<%=currentPage - 1%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">이전</a>
+					<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=<%=currentPage - 1%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">이전</a></li>
 			<%
 				}
 			%>
-			</td>
-			<!-- 다음 페이지로 가는 버튼 -->
-			<td>
+
 			<%
 				if(currentPage < lastPage){
 			%>
-					<a href="./employeesList.jsp?currentPage=<%=currentPage + 1%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">다음</a>
+					<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=<%=currentPage + 1%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">다음</a></li>
 			<%
 				}
 			%>
-			</td>
-			<!-- 마지막 페이지로 가는 버튼 -->
-			<td>
+
 			<%
 				if(currentPage != lastPage){
 			%>
-					<a href="./employeesList.jsp?currentPage=<%=lastPage%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">마지막으로</a>
+					<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=<%=lastPage%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">마지막으로</a></li>
 			<%
 				}
 			%>
-			</td>
-		</tr>
-	</table>
-	<form method="post" action="./employeesList.jsp">
-		<div>
-			gender : 
-			<select name="searchGender">
-				<%	
-					// 선택안함으로 선택했을 경우 select에 선택안함으로 고정
-					if(searchGender.equals("선택안함")){
-				%>
-					<option value="선택안함" selected="selected">선택안함</option>
-				<%
-					} else {
-				%>
-					<option value="선택안함">선택안함</option>
-				<%
-					}
-				// '남'으로 선택했을 경우 select에 '남'으로 고정
-					if(searchGender.equals("M")){
-				%>
-						<option value="M" selected="selected">남</option>
-				<%
-					} else{
-				%>
-						<option value="M">남</option>
-				<%
-					}
-					// '여'로 선택했을 경우 select에 '여'로 고정
-					if(searchGender.equals("F")){
-				%>
-						<option value="F" selected="selected">여</option>
-				<%
-					} else {
-				%>
-						<option value="F">여</option>
-				<%
-					}
-				%>
-			</select>
-			
-			name : 
-			<input type="text" name="searchName" value="<%=searchName%>">
-			
-			<button type="submit">검색</button>
-		</div>
-	</form>
+		</ul>
+	</div>
+	<!-- 검색 부분 -->
+	<div style="width:80%; margin:auto; padding-top:20px; float:center;">
+		<form method="post" action="./employeesList.jsp">
+			<div>
+				gender : 
+				<select class="custom-select" style="width:30%;" name="searchGender">
+					<%	
+						// 선택안함으로 선택했을 경우 select에 선택안함으로 고정
+						if(searchGender.equals("선택안함")){
+					%>
+						<option value="선택안함" selected="selected">선택안함</option>
+					<%
+						} else {
+					%>
+						<option value="선택안함">선택안함</option>
+					<%
+						}
+					// '남'으로 선택했을 경우 select에 '남'으로 고정
+						if(searchGender.equals("M")){
+					%>
+							<option value="M" selected="selected">남</option>
+					<%
+						} else{
+					%>
+							<option value="M">남</option>
+					<%
+						}
+						// '여'로 선택했을 경우 select에 '여'로 고정
+						if(searchGender.equals("F")){
+					%>
+							<option value="F" selected="selected">여</option>
+					<%
+						} else {
+					%>
+							<option value="F">여</option>
+					<%
+						}
+					%>
+				</select>
+				&nbsp;
+				name : <input type="text" class="form-control" style="width:30%; display:inline-block;" name="searchName" value="<%=searchName%>">
+				
+				<button class="btn btn-secondary" type="submit">검색</button>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

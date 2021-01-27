@@ -103,7 +103,13 @@
 		</tbody>
 	</table>
 	<!-- 페이징 네비게이션 -->
+		<%
+			if(currentPage != 1){
+		%>
 			<a href="./titlesList.jsp?currentPage=1">처음으로</a>
+		<%
+			}
+		%>
 		<%
 			if(currentPage > 1){
 		%>
