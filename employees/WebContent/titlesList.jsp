@@ -37,7 +37,6 @@
 	</nav>
 	
 	<!-- titles 테이블 목록 -->
-	<h1>titles 테이블 목록</h1>
 	<%
 		// 현재 페이지
 		int currentPage = 1;
@@ -78,53 +77,62 @@
 	%>
 	
 	<!-- 출력 -->
-	<table border="1">
-		<thead>
-			<tr>
-				<th>emp_no</th>
-				<th>title</th>
-				<th>from_date</th>
-				<th>to_date</th>
-			</tr>
-		</thead>
-		<tbody>
-		<%
-			while(rs.next()){
-		%>
-			<tr>
-				<td><%=rs.getInt("emp_no") %></td>
-				<td><%=rs.getString("title") %></td>
-				<td><%=rs.getString("from_date") %></td>
-				<td><%=rs.getString("to_date") %></td>
-			</tr>
-		<%
-			}
-		%>
-		</tbody>
-	</table>
-	<!-- 페이징 네비게이션 -->
-		<%
-			if(currentPage != 1){
-		%>
-			<a href="./titlesList.jsp?currentPage=1">처음으로</a>
-		<%
-			}
-		%>
-		<%
-			if(currentPage > 1){
-		%>
-			<a href="./titlesList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-		<%
-			}
-		%>
-		<!-- 이슈 : 마지막 페이지는 더 이상 다음이라는 링크가 존재x -->
-		<%
-			if(currentPage < lastPage){
-		%>
-				<a href="./titlesList.jsp?currentPage=<%=currentPage+1%>">다음</a>
-		<%
-			}
-		%>
-			<a href="./titlesList.jsp?currentPage=<%=lastPage%>">마지막으로</a>
+	<div class="container" style="padding-top:20px;">
+		<h1>titles 테이블 목록</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>emp_no</th>
+					<th>title</th>
+					<th>from_date</th>
+					<th>to_date</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%
+				while(rs.next()){
+			%>
+				<tr>
+					<td><%=rs.getInt("emp_no") %></td>
+					<td><%=rs.getString("title") %></td>
+					<td><%=rs.getString("from_date") %></td>
+					<td><%=rs.getString("to_date") %></td>
+				</tr>
+			<%
+				}
+			%>
+			</tbody>
+		</table>
+		<!-- 페이징 네비게이션 -->
+		<ul class="pagination justify-content-center">
+			<%
+				if(currentPage != 1){
+			%>
+				<li class="page-item"><a class="page-link" href="./titlesList.jsp?currentPage=1">처음으로</a></li>
+			<%
+				}
+			%>
+			<%
+				if(currentPage > 1){
+			%>
+				<li class="page-item"><a class="page-link" href="./titlesList.jsp?currentPage=<%=currentPage-1%>">이전</a></li>
+			<%
+				}
+			%>
+			<!-- 이슈 : 마지막 페이지는 더 이상 다음이라는 링크가 존재x -->
+			<%
+				if(currentPage < lastPage){
+			%>
+				<li class="page-item"><a class="page-link" href="./titlesList.jsp?currentPage=<%=currentPage+1%>">다음</a></li>
+			<%
+				}
+				if(currentPage != lastPage){
+			%>
+				<li class="page-item"><a class="page-link" href="./titlesList.jsp?currentPage=<%=lastPage%>">마지막으로</a></li>
+			<% 
+				}
+			%>
+		</ul>
+	</div>
 </body>
 </html>

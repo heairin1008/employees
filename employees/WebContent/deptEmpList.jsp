@@ -155,7 +155,7 @@
 	%>
 	
 	<!-- 현재 부서에 근무중인지 어느 부서인지 검색 -->
-	<div style="width:80%; margin:auto; padding-top:20px; float:center;">
+	<div style="padding-top:20px;" class="container">
 		<h1>dept_emp 테이블 목록</h1>
 		<form action="./deptEmpList.jsp">
 			<%

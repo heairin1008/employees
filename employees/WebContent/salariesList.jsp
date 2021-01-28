@@ -38,7 +38,6 @@
 	
 	<div>
 	<!-- salaries 테이블 목록 -->
-	<h1>salaries 테이블 목록</h1>
 	<%
 		int beginSalary = 0;
 		int endSalary = 0;
@@ -110,87 +109,96 @@
 	%>
 	
 	<!-- 출력 -->
-	<table>
-		<thead>
-			<tr>
-				<th>emp_no</th>
-				<th>salary</th>
-				<th>from_date</th>
-				<th>to_date</th>
-			</tr>
-		</thead>
-		<tbody>
-		<%
-			while(rs2.next()){
-		%>
-			<tr>
-				<td><%=rs2.getInt("emp_no") %></td>
-				<td><%=rs2.getInt("salary") %></td>
-				<td><%=rs2.getString("from_date") %></td>
-				<td><%=rs2.getString("to_date") %></td>
-			</tr>
-		<%
-			}
-		%>
-		</tbody>
-	</table>
-	<form method="post" action="./salariesList.jsp">
-		<select name="beginSalary">
+	<div style="padding-top:20px;" class="container">
+		<h1>salaries 테이블 목록</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>emp_no</th>
+					<th>salary</th>
+					<th>from_date</th>
+					<th>to_date</th>
+				</tr>
+			</thead>
+			<tbody>
 			<%
-				for(int i=0; i<maxSalary; i=i+10000){
-					if(beginSalary == i){
+				while(rs2.next()){
 			%>
-					<option value="<%=i%>" selected="selected"><%=i%></option>
+				<tr>
+					<td><%=rs2.getInt("emp_no") %></td>
+					<td><%=rs2.getInt("salary") %></td>
+					<td><%=rs2.getString("from_date") %></td>
+					<td><%=rs2.getString("to_date") %></td>
+				</tr>
 			<%
-					}else{
-			%>
-					<option value="<%=i%>"><%=i%></option>
-			<%
-					}
 				}
 			%>
-		</select>
-		<select name="endSalary">
-			<%
-				for(int i=(maxSalary / range + 1)*range; i>0; i=i-10000){
-					if(endSalary == i){
-			%>
-					<option value="<%=i%>" selected="selected"><%=i%></option>
-			<%
-					}else{
-			%>
-					<option value="<%=i%>"><%=i%></option>
-			<%
+			</tbody>
+		</table>
+		<form method="post" action="./salariesList.jsp">
+			<select class="custom-select" style="width:30%;" name="beginSalary">
+				<%
+					for(int i=0; i<maxSalary; i=i+10000){
+						if(beginSalary == i){
+				%>
+						<option value="<%=i%>" selected="selected"><%=i%></option>
+				<%
+						}else{
+				%>
+						<option value="<%=i%>"><%=i%></option>
+				<%
+						}
 					}
-				}
-			%>
-		</select>
-		<button type="submit">검색</button>
-	</form>
-	<!-- 페이징 네비게이션 -->
-		<%
-			if(currentPage != 1){
-		%>
-			<a href="./salariesList.jsp?currentPage=1&beginSalary=<%=beginSalary%>&endSalary=<%=endSalary%>">처음으로</a>
-		<% 
-			}
-		%>
-		<%
-			if(currentPage > 1){
-		%>
-			<a href="./salariesList.jsp?currentPage=<%=currentPage-1%>&beginSalary=<%=beginSalary%>&endSalary=<%=endSalary%>">이전</a>
-		<%
-			}
-		%>
-		<!-- 이슈 : 마지막 페이지는 더 이상 다음이라는 링크가 존재x -->
-		<%
-			if(currentPage < lastPage){
-		%>
-				<a href="./salariesList.jsp?currentPage=<%=currentPage+1%>&beginSalary=<%=beginSalary%>&endSalary=<%=endSalary%>">다음</a>
-		<%
-			}
-		%>
-			<a href="./salariesList.jsp?currentPage=<%=lastPage%>&beginSalary=<%=beginSalary%>&endSalary=<%=endSalary%>">마지막으로</a>
+				%>
+			</select>
+			<select class="custom-select" style="width:30%;" name="endSalary">
+				<%
+					for(int i=(maxSalary / range + 1)*range; i>0; i=i-10000){
+						if(endSalary == i){
+				%>
+						<option value="<%=i%>" selected="selected"><%=i%></option>
+				<%
+						}else{
+				%>
+						<option value="<%=i%>"><%=i%></option>
+				<%
+						}
+					}
+				%>
+			</select>
+			<button class="btn btn-secondary" type="submit">검색</button>
+		</form>
+			<!-- 페이징 네비게이션 -->
+			<ul style="margin-top:20px;" class="pagination justify-content-center">
+				<%
+					if(currentPage != 1){
+				%>
+				<li class="page-item"><a class="page-link" href="./salariesList.jsp?currentPage=1&beginSalary=<%=beginSalary%>&endSalary=<%=endSalary%>">처음으로</a></li>
+				<% 
+					}
+				%>
+				<%
+					if(currentPage > 1){
+				%>
+					<li class="page-item"><a class="page-link" href="./salariesList.jsp?currentPage=<%=currentPage-1%>&beginSalary=<%=beginSalary%>&endSalary=<%=endSalary%>">이전</a></li>
+				<%
+					}
+				%>
+				<!-- 이슈 : 마지막 페이지는 더 이상 다음이라는 링크가 존재x -->
+				<%
+					if(currentPage < lastPage){
+				%>
+					<li class="page-item"><a class="page-link" href="./salariesList.jsp?currentPage=<%=currentPage+1%>&beginSalary=<%=beginSalary%>&endSalary=<%=endSalary%>">다음</a></li>
+				<%
+					}
+					if(currentPage != lastPage){
+				%>
+					<li class="page-item"><a class="page-link" href="./salariesList.jsp?currentPage=<%=lastPage%>&beginSalary=<%=beginSalary%>&endSalary=<%=endSalary%>">마지막으로</a></li>
+				<% 
+					}
+				%>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>

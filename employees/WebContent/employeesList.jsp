@@ -133,7 +133,7 @@
 		}
 	%>
 	
-	<div style="width:80%; margin:auto; padding-top:20px; float:center;">
+	<div style="padding-top:20px;" class="container">
 		<h1>employees 테이블 목록</h1>
 		<table class="table" style="margin-top:10px;">
 			<thead>
@@ -183,87 +183,87 @@
 				%>
 			</tbody>
 		</table>
-	</div>
 	<!-- 페이징 네비게이션 -->
-	<div>
-		<ul class="pagination justify-content-center">
-			<%
-				if(currentPage != 1){
-			%>
-					<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=1&searchGender=<%=searchGender%>&searchName=<%=searchName%>">처음으로</a></li>
-			<%
-				}
-			%>
-			<%
-				if(currentPage > 1){
-			%>
-					<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=<%=currentPage - 1%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">이전</a></li>
-			<%
-				}
-			%>
-
-			<%
-				if(currentPage < lastPage){
-			%>
-					<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=<%=currentPage + 1%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">다음</a></li>
-			<%
-				}
-			%>
-
-			<%
-				if(currentPage != lastPage){
-			%>
-					<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=<%=lastPage%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">마지막으로</a></li>
-			<%
-				}
-			%>
-		</ul>
-	</div>
-	<!-- 검색 부분 -->
-	<div style="width:80%; margin:auto; padding-top:20px; float:center;">
-		<form method="post" action="./employeesList.jsp">
-			<div>
-				gender : 
-				<select class="custom-select" style="width:30%;" name="searchGender">
-					<%	
-						// 선택안함으로 선택했을 경우 select에 선택안함으로 고정
-						if(searchGender.equals("선택안함")){
-					%>
-						<option value="선택안함" selected="selected">선택안함</option>
-					<%
-						} else {
-					%>
-						<option value="선택안함">선택안함</option>
-					<%
-						}
-					// '남'으로 선택했을 경우 select에 '남'으로 고정
-						if(searchGender.equals("M")){
-					%>
-							<option value="M" selected="selected">남</option>
-					<%
-						} else{
-					%>
-							<option value="M">남</option>
-					<%
-						}
-						// '여'로 선택했을 경우 select에 '여'로 고정
-						if(searchGender.equals("F")){
-					%>
-							<option value="F" selected="selected">여</option>
-					<%
-						} else {
-					%>
-							<option value="F">여</option>
-					<%
-						}
-					%>
-				</select>
-				&nbsp;
-				name : <input type="text" class="form-control" style="width:30%; display:inline-block;" name="searchName" value="<%=searchName%>">
-				
-				<button class="btn btn-secondary" type="submit">검색</button>
-			</div>
-		</form>
+		<div>
+			<ul class="pagination justify-content-center">
+				<%
+					if(currentPage != 1){
+				%>
+						<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=1&searchGender=<%=searchGender%>&searchName=<%=searchName%>">처음으로</a></li>
+				<%
+					}
+				%>
+				<%
+					if(currentPage > 1){
+				%>
+						<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=<%=currentPage - 1%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">이전</a></li>
+				<%
+					}
+				%>
+	
+				<%
+					if(currentPage < lastPage){
+				%>
+						<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=<%=currentPage + 1%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">다음</a></li>
+				<%
+					}
+				%>
+	
+				<%
+					if(currentPage != lastPage){
+				%>
+						<li class="page-item"><a class="page-link" href="./employeesList.jsp?currentPage=<%=lastPage%>&searchGender=<%=searchGender%>&searchName=<%=searchName%>">마지막으로</a></li>
+				<%
+					}
+				%>
+			</ul>
+		</div>
+		<!-- 검색 부분 -->
+		<div style="padding-top:20px;">
+			<form method="post" action="./employeesList.jsp">
+				<div>
+					gender : 
+					<select class="custom-select" style="width:30%;" name="searchGender">
+						<%	
+							// 선택안함으로 선택했을 경우 select에 선택안함으로 고정
+							if(searchGender.equals("선택안함")){
+						%>
+							<option value="선택안함" selected="selected">선택안함</option>
+						<%
+							} else {
+						%>
+							<option value="선택안함">선택안함</option>
+						<%
+							}
+						// '남'으로 선택했을 경우 select에 '남'으로 고정
+							if(searchGender.equals("M")){
+						%>
+								<option value="M" selected="selected">남</option>
+						<%
+							} else{
+						%>
+								<option value="M">남</option>
+						<%
+							}
+							// '여'로 선택했을 경우 select에 '여'로 고정
+							if(searchGender.equals("F")){
+						%>
+								<option value="F" selected="selected">여</option>
+						<%
+							} else {
+						%>
+								<option value="F">여</option>
+						<%
+							}
+						%>
+					</select>
+					&nbsp;
+					name : <input type="text" class="form-control" style="width:30%; display:inline-block;" name="searchName" value="<%=searchName%>">
+					
+					<button class="btn btn-secondary" type="submit">검색</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

@@ -124,7 +124,7 @@
 	%>
 	
 	<!-- 출력 -->
-	<div style="width:80%; margin:auto; padding-top:20px; float:center;">
+	<div style="padding-top:20px;" class="container">
 		<h1>dept_manager 테이블 목록</h1>
 		<form action="./deptManagerList.jsp">
 			<%

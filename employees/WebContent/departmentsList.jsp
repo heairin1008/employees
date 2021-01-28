@@ -37,7 +37,7 @@
 	  	</ul>
 	</nav>
 	
-	<div style="width:80%; margin:auto; padding-top:20px; float:center;">
+	<div style="padding-top:20px;" class="container">
 	<h1>departments 테이블 목록</h1>
 	<%
 		String deptName = "";
