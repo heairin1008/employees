@@ -8,9 +8,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
 	#main{ 
-    margin-left:50px;
+    margin-left:30%;
     margin-top:50px;
 }
+	.container{
+		padding:20px 0;
+		margin-top:3%;
+	}
 </style>
 </head>
 <body>
@@ -42,14 +46,17 @@
 	</nav>
 	
 	<!-- 홈페이지(메인) 내용  -->
-	<div id="main">
-		<h1>EMPLOYEES 미니 프로젝트</h1>
-		<h4>2020.09</h4>
-		<ul>
-			<li>jsp만을 사용해 제작한 직원 관리 프로젝트</li>
-			<li>제작 : eclipse, tomcat 8.5, mariaDB 사용</li>
-			<li>css : bootstrap 사용</li>
-		</ul>
+	<div class="container" style="background-color:#BC9BFF;">
+		<div id="main">
+			<h1>EMPLOYEES 미니 프로젝트</h1>
+			<h4>2020.09</h4>
+			<ul>
+				<li>jsp만을 사용해 제작한 직원 관리 프로젝트</li>
+				<li>제작 : eclipse, tomcat 8.5, mariaDB 사용</li>
+				<li>css : bootstrap 사용</li>
+			</ul>
+			<img src="./image/employees.jpg" width=500px; height=300px;>
+		</div>
 	</div>
 </body>
 </html>
